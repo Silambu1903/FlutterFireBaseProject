@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
   static String id = "/dashboard";
+  static String userName = "";
 
   const Dashboard({Key? key}) : super(key: key);
 
@@ -19,6 +20,7 @@ class _DashboardState extends State<Dashboard> {
     if (user != null) {
       loggedInUser = user;
       print(loggedInUser);
+      Dashboard.userName = loggedInUser.displayName.toString();
     }
   }
 
@@ -30,6 +32,19 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: FutureBuilder(
+          future: getFileData(),
+          builder: (BuildContext context, AsyncSnapshot<String> text) {
+            return new Text(text.data ?? "");
+          },
+        ),
+      ),
+    );
   }
+}
+
+Future<String> getFileData() async {
+  return await new Future(() => Dashboard.userName);
 }

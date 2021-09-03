@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
-import 'package:flutterfirebaseapp/screens/dashboardScreen.dart';
 import 'package:flutterfirebaseapp/screens/loginScreen.dart';
 import 'package:flutterfirebaseapp/theme/myTheme.dart';
 
@@ -21,9 +20,33 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _auth = FirebaseAuth.instance;
-  String userName = "";
+  late User loggedInUser;
+
   String email = "";
   String password = "";
+  String userName = "";
+  bool showProgress = false;
+
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController userEmailController = TextEditingController();
+  TextEditingController userPasswordController = TextEditingController();
+  bool _validate = false;
+
+  bool validateTextField(String userInput, String text) {
+    if (userInput.isEmpty) {
+      setState(() {
+        _validate = true;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(text),
+        ));
+      });
+      return false;
+    }
+    setState(() {
+      _validate = false;
+    });
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +104,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Container(
+                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: Card(
-                        margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
-                        elevation: 5,
+                        elevation: 10,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(20), // if you need this
@@ -120,8 +144,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     Container(
                       child: Card(
-                        margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
-                        elevation: 5,
+                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        elevation: 10,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(20), // if you need this
@@ -179,24 +203,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: MediaQuery.of(context).size.height * 0.09,
                       child: TextField(
+                        controller: userNameController,
                         onChanged: (value) {
                           userName = value;
                         },
                         textInputAction: TextInputAction.next,
                         style: TextStyle(color: Colors.white),
                         decoration: new InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: MyColors.accent, width: 2.0),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: MyColors.secondary, width: 2.0),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            hintText: '  silambu',
-                            hintStyle: TextStyle(color: MyColors.accent)),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyColors.accent, width: 2.0),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyColors.secondary, width: 2.0),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          hintText: '  silambu',
+                          hintStyle: TextStyle(color: MyColors.accent),
+                          errorText:
+                              _validate ? 'Please enter a Username' : null,
+                        ),
                       ),
                     ),
                   ],
@@ -224,24 +252,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: MediaQuery.of(context).size.height * 0.09,
                       child: TextField(
+                        controller: userEmailController,
                         onChanged: (value) {
                           email = value;
                         },
                         textInputAction: TextInputAction.next,
                         style: TextStyle(color: Colors.white),
                         decoration: new InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: MyColors.accent, width: 2.0),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: MyColors.secondary, width: 2.0),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            hintText: '  silambu@gmail.com',
-                            hintStyle: TextStyle(color: MyColors.accent)),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: MyColors.accent, width: 2.0),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: MyColors.secondary, width: 2.0),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          hintText: '  silambu@gmail.com',
+                          hintStyle: TextStyle(color: MyColors.accent),
+                          errorText: _validate ? 'Please enter a Email' : null,
+                        ),
                       ),
                     ),
                   ],
@@ -269,6 +300,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: MediaQuery.of(context).size.height * 0.09,
                       child: TextField(
+                        controller: userPasswordController,
                         obscureText: true,
                         onChanged: (value) {
                           password = value;
@@ -287,6 +319,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             hintText: '  123456',
+                            errorText:
+                                _validate ? 'Please enter a Password' : null,
                             hintStyle: TextStyle(color: MyColors.accent)),
                       ),
                     ),
@@ -301,16 +335,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: MediaQuery.of(context).size.height * 0.07,
                       child: RaisedButton(
                         onPressed: () async {
+                          validateTextField(userNameController.text,
+                              "Please Enter the User Name");
+                          validateTextField(userEmailController.text,
+                              "Please Enter the User Email");
+                          validateTextField(userPasswordController.text,
+                              "Please Enter the User Password");
                           try {
                             final newUser =
                                 await _auth.createUserWithEmailAndPassword(
                                     email: email, password: password);
+                            final user = _auth.currentUser;
+                            if (user != null) {
+                              user.updateDisplayName(userName);
+                            }
                             if (newUser != null) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
-                                content: Text('User SignedUp '),
+                                content: Text('Register Successfully '),
                               ));
-                              Navigator.of(context).pushNamed(Dashboard.id);
+                              Navigator.of(context).pushNamed(LoginScreen.id);
                             }
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -345,7 +389,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.015),
+                                  MediaQuery.of(context).size.height * 0.02),
                         ),
                       ),
                     ),

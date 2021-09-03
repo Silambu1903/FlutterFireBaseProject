@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/screens/registerScreen.dart';
-
 import 'dashboardScreen.dart';
 
 class LoginScreen extends StatefulWidget {
