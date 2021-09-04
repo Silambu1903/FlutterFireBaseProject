@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfirebaseapp/customDesign/bottomBar.dart';
 
 class Dashboard extends StatefulWidget {
   static String id = "/dashboard";
@@ -32,15 +33,9 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    int _currentIndex = 0;
     return Scaffold(
-      body: Center(
-        child: FutureBuilder(
-          future: getFileData(),
-          builder: (BuildContext context, AsyncSnapshot<String> text) {
-            return new Text(text.data ?? "");
-          },
-        ),
-      ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

@@ -3,7 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/screens/loginScreen.dart';
+import 'package:flutterfirebaseapp/services/firebaseGoogleSignIn.dart';
 import 'package:flutterfirebaseapp/theme/myTheme.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import 'dashboardScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,36 +110,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(20), // if you need this
-                          side: BorderSide(
-                            color: MyColors.accent,
-                            width: 2.0,
-                          ),
-                        ),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.08,
-                          decoration: BoxDecoration(
-                            color: MyColors.primary,
-                            border:
-                                Border.all(color: MyColors.accent, width: 2.0),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                    GestureDetector(
+                      onTap: () {
+                        FirebaseGoogleSignIn service =
+                            new FirebaseGoogleSignIn();
+                        try {
+                          service.signInwithGoogle();
+                          if (service.userName != null) {
+                            Navigator.of(context).pushNamed(Dashboard.id);
+                          }
+                        } catch (e) {}
+                      },
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(20), // if you need this
+                            side: BorderSide(
+                              color: MyColors.accent,
+                              width: 2.0,
                             ),
                           ),
                           child: Container(
-                            child: Center(
-                              child: Image.asset(
-                                "assets/google.png",
-                                width: MediaQuery.of(context).size.width * 0.06,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.08,
+                            decoration: BoxDecoration(
+                              color: MyColors.primary,
+                              border: Border.all(
+                                  color: MyColors.accent, width: 2.0),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20.0),
+                              ),
+                            ),
+                            child: Container(
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/google.png",
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.06,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.06,
+                                ),
                               ),
                             ),
                           ),
@@ -145,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Container(
                       child: Card(
                         margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        elevation: 10,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(20), // if you need this
