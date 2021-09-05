@@ -3,6 +3,7 @@ import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/screens/dashboardScreen.dart';
 import 'package:flutterfirebaseapp/screens/registerScreen.dart';
 import 'package:flutterfirebaseapp/screens/loginScreen.dart';
+import 'package:flutterfirebaseapp/screens/userDetailsScreen.dart';
 
 class MyAppTheme extends StatelessWidget {
   @override
@@ -14,11 +15,12 @@ class MyAppTheme extends StatelessWidget {
           fontFamily: "Poppins",
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: RegisterScreen.id,
+        initialRoute: UserDetails.id,
         routes: <String, WidgetBuilder>{
           RegisterScreen.id: (BuildContext context) => new RegisterScreen(),
           LoginScreen.id: (BuildContext context) => new LoginScreen(),
           Dashboard.id: (BuildContext context) => new Dashboard(),
+          UserDetails.id: (BuildContext context) => new UserDetails(),
         });
   }
 }

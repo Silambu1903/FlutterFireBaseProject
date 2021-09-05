@@ -12,7 +12,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.09,
       decoration: BoxDecoration(
@@ -24,7 +24,58 @@ class _BottomBarState extends State<BottomBar> {
           bottomLeft: Radius.circular(10.0),
         ),
       ),
-      child: Stack(),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.home_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox.fromSize(),
+                ),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

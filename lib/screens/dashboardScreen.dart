@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/customDesign/bottomBar.dart';
 
 class Dashboard extends StatefulWidget {
@@ -19,8 +20,11 @@ class _DashboardState extends State<Dashboard> {
   void getCurrentUser() async {
     final user = await _auth.currentUser;
     if (user != null) {
+      final userId = user.uid;
       loggedInUser = user;
-      print(loggedInUser);
+      print(loggedInUser.displayName);
+      print(userId.toString());
+
       Dashboard.userName = loggedInUser.displayName.toString();
     }
   }
@@ -34,8 +38,51 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 0;
-    return Scaffold(
-      bottomNavigationBar: BottomBar(),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.9,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: BottomBar(),
+            ),
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.82,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width*0.2,
+                  height: MediaQuery.of(context).size.height*0.09,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.all(5.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: MyColors.secondary,
+                    ),
+                    child: Center(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.add),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ) ,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -19,26 +19,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyColors.primary,
-      body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                backArrow(context),
-                textLogin(context, 'Login up with one of following options.',
-                    MyColors.ash, 0.015),
-                rowCard(context),
-                textLogin(context, 'Email', Colors.white, 0.032),
-                textFiled(context, 'silambu@gmail.com', 0),
-                textLogin(context, 'Password', Colors.white, 0.032),
-                textFiled(context, '123456', 1),
-                loginButton(context, "Login", _auth),
-                registerText(context, "Don't have an Account Signup here!")
-              ],
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.primary,
+        body: SafeArea(
+          child: ListView(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  backArrow(context),
+                  textLogin(context, 'Login up with one of following options.',
+                      MyColors.ash, 0.015),
+                  rowCard(context),
+                  textLogin(context, 'Email', Colors.white, 0.032),
+                  textFiled(context, 'silambu@gmail.com', 0),
+                  textLogin(context, 'Password', Colors.white, 0.032),
+                  textFiled(context, '123456', 1),
+                  loginButton(context, "Login", _auth),
+                  registerText(context, "Don't have an Account Signup here!")
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
