@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/screens/registerScreen.dart';
+import 'package:flutterfirebaseapp/screens/userDetailsScreen.dart';
 import 'dashboardScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -224,9 +225,9 @@ Widget loginButton(BuildContext context, String text, FirebaseAuth auth) {
             final user = await auth.signInWithEmailAndPassword(
                 email: LoginScreen.email, password: LoginScreen.password);
             if (user != null) {
-              Navigator.of(context).pushNamed(Dashboard.id);
+              Navigator.of(context).pushNamed(UserDetails.id);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('User Logged In'),
+                content: Text('Logged In'),
               ));
             }
           },

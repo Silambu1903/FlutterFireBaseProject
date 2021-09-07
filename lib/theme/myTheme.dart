@@ -15,7 +15,7 @@ class MyAppTheme extends StatelessWidget {
           fontFamily: "Poppins",
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: UserDetails.id,
+        initialRoute: RegisterScreen.id,
         routes: <String, WidgetBuilder>{
           RegisterScreen.id: (BuildContext context) => new RegisterScreen(),
           LoginScreen.id: (BuildContext context) => new LoginScreen(),

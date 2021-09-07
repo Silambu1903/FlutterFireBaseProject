@@ -24,7 +24,6 @@ class _DashboardState extends State<Dashboard> {
       loggedInUser = user;
       print(loggedInUser.displayName);
       print(userId.toString());
-
       Dashboard.userName = loggedInUser.displayName.toString();
     }
   }
@@ -44,21 +43,21 @@ class _DashboardState extends State<Dashboard> {
           alignment: Alignment.bottomCenter,
           children: [
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.9,
+              top: MediaQuery.of(context).size.height * 0.85,
               left: 0,
               right: 0,
               bottom: 0,
               child: BottomBar(),
             ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.82,
+              top: MediaQuery.of(context).size.height * 0.77,
               left: 0,
               right: 0,
               bottom: 0,
               child: Center(
                 child: Container(
-                  width: MediaQuery.of(context).size.width*0.2,
-                  height: MediaQuery.of(context).size.height*0.09,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
@@ -76,7 +75,7 @@ class _DashboardState extends State<Dashboard> {
                         color: Colors.white,
                       ),
                     ),
-                  ) ,
+                  ),
                 ),
               ),
             ),
