@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
 import 'package:flutterfirebaseapp/customDesign/bottomBar.dart';
+import 'package:flutterfirebaseapp/screens/usersListScreen.dart';
 
 class Dashboard extends StatefulWidget {
   static String id = "/dashboard";
@@ -42,6 +43,13 @@ class _DashboardState extends State<Dashboard> {
         body: Stack(
           alignment: Alignment.bottomCenter,
           children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: MediaQuery.of(context).size.height*0.08,
+              child: UserListScreen(),
+            ),
             Positioned(
               top: MediaQuery.of(context).size.height * 0.85,
               left: 0,

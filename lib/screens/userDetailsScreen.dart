@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
@@ -26,6 +27,7 @@ class _UserDetailsState extends State<UserDetails> {
   late String about;
   late String gender;
   late String dob;
+  final _firebaseStorage = FirebaseStorage.instance;
 
   _getFromGallery() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
@@ -71,7 +73,10 @@ class _UserDetailsState extends State<UserDetails> {
                         "Personal Data",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.04,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.04,
                         ),
                       ),
                     ),
@@ -86,8 +91,14 @@ class _UserDetailsState extends State<UserDetails> {
                       },
                       child: ClipRect(
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width * 0.3,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.2,
                           decoration: BoxDecoration(
                             color: MyColors.secondary,
                             borderRadius: BorderRadius.all(
@@ -112,7 +123,10 @@ class _UserDetailsState extends State<UserDetails> {
                         "About",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.025,
                         ),
                       ),
                     ),
@@ -122,8 +136,14 @@ class _UserDetailsState extends State<UserDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.9,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.09,
                       child: TextField(
                         onChanged: (value) {
                           about = value;
@@ -133,7 +153,7 @@ class _UserDetailsState extends State<UserDetails> {
                         decoration: new InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: MyColors.accent, width: 2.0),
+                            BorderSide(color: MyColors.accent, width: 2.0),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -157,7 +177,10 @@ class _UserDetailsState extends State<UserDetails> {
                         "Date of Birth",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.025,
                         ),
                       ),
                     ),
@@ -167,8 +190,14 @@ class _UserDetailsState extends State<UserDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.9,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.09,
                       child: TextField(
                         onChanged: (value) {
                           dob = value;
@@ -178,7 +207,7 @@ class _UserDetailsState extends State<UserDetails> {
                         decoration: new InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: MyColors.accent, width: 2.0),
+                            BorderSide(color: MyColors.accent, width: 2.0),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -202,7 +231,10 @@ class _UserDetailsState extends State<UserDetails> {
                         "Gender",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
+                          fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.025,
                         ),
                       ),
                     ),
@@ -212,8 +244,14 @@ class _UserDetailsState extends State<UserDetails> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.4,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.09,
                       decoration: BoxDecoration(
                         border: Border.all(color: MyColors.accent, width: 2.0),
                         borderRadius: BorderRadius.all(
@@ -237,14 +275,23 @@ class _UserDetailsState extends State<UserDetails> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.025),
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.025),
                           )
                         ],
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.4,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.09,
                       decoration: BoxDecoration(
                         border: Border.all(color: MyColors.accent, width: 2.0),
                         borderRadius: BorderRadius.all(
@@ -268,7 +315,10 @@ class _UserDetailsState extends State<UserDetails> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
-                                    MediaQuery.of(context).size.height * 0.025),
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.025),
                           )
                         ],
                       ),
@@ -280,8 +330,14 @@ class _UserDetailsState extends State<UserDetails> {
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.fromLTRB(0, 25, 0, 0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.9,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.07,
                       child: RaisedButton(
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(10.0),
@@ -291,17 +347,25 @@ class _UserDetailsState extends State<UserDetails> {
                         textColor: Colors.white,
                         onPressed: () async {
                           try {
+                            var snapshot = await _firebaseStorage
+                                .ref()
+                                .child('images/'+loggedInUser.displayName.toString()+'profilePic')
+                                .putFile(imageFile);
+                            var downloadUrl =
+                            await snapshot.ref.getDownloadURL();
+
                             await FirebaseFirestore.instance
                                 .collection("UserData")
                                 .doc(loggedInUser.uid)
                                 .set(
-                              {
-                                "name": loggedInUser.displayName,
-                                "email": loggedInUser.email,
-                                "about": about,
-                                "gender": gender,
-                                "dob": dob,
-                              },
+                            {
+                            "name": loggedInUser.displayName,
+                            "profile":downloadUrl,
+                            "email": loggedInUser.email,
+                            "about": about,
+                            "gender": gender,
+                            "dob": dob,
+                            },
                             );
                             loggedInUser.updatePhotoURL(profileUrl);
                             Navigator.of(context).pushNamed(Dashboard.id);
@@ -321,5 +385,3 @@ class _UserDetailsState extends State<UserDetails> {
     );
   }
 }
-
-Future uploadImageToFirebase(BuildContext context) async {}
