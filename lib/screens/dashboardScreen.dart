@@ -47,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
               top: 0,
               left: 0,
               right: 0,
-              bottom: MediaQuery.of(context).size.height*0.08,
+              bottom: MediaQuery.of(context).size.height * 0.12,
               child: UserListScreen(),
             ),
             Positioned(
