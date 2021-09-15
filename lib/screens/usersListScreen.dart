@@ -1,14 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfirebaseapp/colors/colors.dart';
 
 class UserListScreen extends StatefulWidget {
   static String id = "/userList";
 
+
   @override
   _UserListScreenState createState() => _UserListScreenState();
 }
 
 class _UserListScreenState extends State<UserListScreen> {
+  @override
+  void initState() {
+    getFirebaseImageFolder();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,3 +114,16 @@ Widget list(BuildContext context) {
     ],
   );
 }
+
+void getFirebaseImageFolder() async {
+
+  final Reference storageRef =
+  await FirebaseStorage.instance.ref().child('UserData');
+  storageRef.listAll().then((result) {
+    print("result is $result");
+  });
+}
+
+
+
+
