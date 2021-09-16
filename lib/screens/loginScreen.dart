@@ -225,7 +225,7 @@ Widget loginButton(BuildContext context, String text, FirebaseAuth auth) {
             final user = await auth.signInWithEmailAndPassword(
                 email: LoginScreen.email, password: LoginScreen.password);
             if (user != null) {
-              Navigator.of(context).pushNamed(UserDetails.id);
+              Navigator.of(context).pushNamed(Dashboard.id);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Logged In'),
               ));
