@@ -83,8 +83,6 @@ Widget listItem(BuildContext context, dynamic url) {
           child: Stack(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.s,
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
                     children: [
