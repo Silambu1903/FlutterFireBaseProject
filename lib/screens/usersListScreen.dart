@@ -53,12 +53,13 @@ class _UserListScreenState extends State<UserListScreen> {
 
 Widget userListItem(BuildContext context, dynamic url) {
   return SafeArea(
-    child: GridView.count(
-      crossAxisCount: 2,
-      children: List.generate(4, (index) {
-        return listItem(context, url);
-      }),
-    ),
+   child: ListView.builder(
+     itemCount: 6,
+     itemBuilder: (BuildContext context, int index) {
+     return Item(context);
+   },
+
+   ),
   );
 }
 
@@ -83,8 +84,10 @@ Widget listItem(BuildContext context, dynamic url) {
           child: Stack(
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "username : ",
@@ -103,6 +106,7 @@ Widget listItem(BuildContext context, dynamic url) {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Gender : ",
@@ -125,8 +129,8 @@ Widget listItem(BuildContext context, dynamic url) {
                     children: [
                       Container(
                         margin: EdgeInsets.all(10),
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.05,
                         child: MaterialButton(
                           onPressed: () {},
                           shape: new RoundedRectangleBorder(
@@ -206,5 +210,19 @@ Widget list(BuildContext context) {
         ),
       ),
     ],
+  );
+}
+
+Widget Item(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.all(10),
+    width: MediaQuery.of(context).size.width * 0.9,
+    height: MediaQuery.of(context).size.height *0.2,
+    decoration: BoxDecoration(
+      color: MyColors.primary,
+      borderRadius: BorderRadius.all(
+        Radius.circular(10.0),
+      ),
+    ),
   );
 }
