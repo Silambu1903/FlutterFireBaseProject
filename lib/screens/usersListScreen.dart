@@ -180,7 +180,7 @@ Widget listItem(BuildContext context, dynamic url) {
               backgroundColor: Colors.white,
               child: ClipOval(
                 child: Image.network(
-                  "https://firebasestorage.googleapis.com/v0/b/fluttersocialchat-73c72.appspot.com/o/images%2FsilambuprofilePic?alt=media&token=4970f93f-775d-4b50-afac-08f1a2193b9f",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNOhpV67XSI4Vz5Z_L7XoWiH7UzZQDBTzS3g&usqp=CAU",
                   width: MediaQuery.of(context).size.width * 0.12,
                   height: MediaQuery.of(context).size.height * 0.08,
                   fit: BoxFit.cover,
